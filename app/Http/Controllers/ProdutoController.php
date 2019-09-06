@@ -8,6 +8,27 @@ use Request;
 class ProdutoController extends Controller
 {
 
+  public function adiciona()
+  {
+
+    $nome = Request::input('nome');
+    $descricao = Request::input('descricao');
+    $valor = Request::input('valor');
+    $quantidade = Request::input('quantidade');
+
+    DB::insert('insert into produtos 
+    (nome, quantidade, valor, descricao) values (?,?,?,?)', 
+    array($nome, $valor, $descricao, $quantidade));
+
+  //return view('produtos.adicionado');
+  return view('produtos.adicionado')->with('nome', $nome);
+  }
+
+  public function novo()
+  {
+    return view('produtos.formulario');
+  }
+
   public function lista()
   {
 
@@ -15,8 +36,9 @@ class ProdutoController extends Controller
 
     $data = ['produtos' => $produtos];
 
-    if (view()->exists('listagem')) {
-      return view('listagem', $data);
+    if (view()->exists('produtos.listagem')) {
+      //return view('listagem', $data);
+      return view('produtos.listagem')->with('produtos', $produtos);
     }
   }
   public function mostra($id)
@@ -31,6 +53,7 @@ class ProdutoController extends Controller
     if (empty($resposta)) {
       return "Esse produto não existe";
     }
-    return view('detalhes')->with('p', $resposta[0]);
+    //return view('detalhes')->with('p', $resposta[0]);
+    return view('produtos.detalhes')->with('p', $resposta[0]);
   }
 }

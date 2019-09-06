@@ -11,14 +11,20 @@
 |
 */
 
-
+//Listagem de produtos
 Route::get('/produtos', ['uses' => 'ProdutoController@lista']);
-
-//Route::get('/produtos/mostra', 'ProdutoController@mostra');
-//Route::get('/produtos/mostra/{id?}', 'ProdutoController@mostra');
-
+//Cadastrando um produto
+Route::get('/produtos/adiciona', 'ProdutoController@adiciona');
+//Direcionando para a apagina de cadastro
+Route::get('/produtos/novo', 'ProdutoController@novo');
+//Visualizando produto
 Route::get(
    '/produtos/mostra/{id}', 
    'ProdutoController@mostra'
     )
    ->where('id', '[0-9]+');
+
+
+//Route::get('/produtos/mostra', 'ProdutoController@mostra');
+//Route::get('/produtos/mostra/{id?}', 'ProdutoController@mostra');
+
