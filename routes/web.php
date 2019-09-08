@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
 //Listagem de produtos
 Route::get('/produtos', ['uses' => 'ProdutoController@lista']);
 //Cadastrando um produto
-Route::get('/produtos/adiciona', 'ProdutoController@adiciona');
+//Route::get('/produtos/adiciona', 'ProdutoController@adiciona');
 //Direcionando para a apagina de cadastro
 Route::get('/produtos/novo', 'ProdutoController@novo');
 //Visualizando produto

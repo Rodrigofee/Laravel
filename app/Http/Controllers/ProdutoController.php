@@ -21,8 +21,9 @@ class ProdutoController extends Controller
     array($nome, $valor, $descricao, $quantidade));
 
   //return view('produtos.adicionado');
-  return view('produtos.adicionado')->with('nome', $nome);
-  }
+  return redirect('/produtos')->withInput(Request::only('nome'));
+  
+}
 
   public function novo()
   {
@@ -32,7 +33,7 @@ class ProdutoController extends Controller
   public function lista()
   {
 
-    $produtos = DB::select('select * from produtos');
+    $produtos = DB::select('select * from produtos order by id desc limit 5');
 
     $data = ['produtos' => $produtos];
 
