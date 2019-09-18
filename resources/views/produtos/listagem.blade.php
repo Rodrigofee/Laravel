@@ -12,8 +12,6 @@
     <td>Drescrição</td>
     <td>Quantidade</td>
     <td></td>
-    <td></td>
-    <td></td>
   </tr>
   @foreach ($produtos as $p)
   <tr class="{{ $p->quantidade == 1 ?'alert-danger' : ''}}">
@@ -26,16 +24,6 @@
         Visualizar
       </a>
     </td>
-    <td> 
-    <a href="{{action('ProdutoController@remove', $p->id)}}"> 
-      Remover
-    </a>
-  </td>
-    <td> 
-    <a href="{{action('ProdutoController@altera', $p->id)}}"> 
-      Alterar
-    </a>
-  </td>
   </tr>
   @endforeach
 </table>
@@ -54,7 +42,4 @@
         O produto {{ old('nome') }} foi adicionado.
   </div>
 @endif
-<div class="col-md-3 offset-sm-4">
-{{ $produtos->links() }}
-</div>
 @stop
