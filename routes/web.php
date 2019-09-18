@@ -11,10 +11,40 @@
 |
 */
 
-//Listagem de produtos
+//--Novo modelo de autenticação
+Route::get('/login', 'LoginController@login');
+//--
+
+
+
+
+//Route::get('/home', 'HomeController@index');
+Route::post('/produtos/update', 'ProdutoController@update');
+Route::get(
+   '/produtos/altera/{id}', 
+   'ProdutoController@altera'
+    )
+   ->where('id', '[0-9]+');
+Route::resource('auth', 'Auth\LoginController');
+Route::resource('password', 'Auth\ForgotPasswordController');
+//Route::resource('auth','Auth\AuthController');
+//Route::resource('password','Auth\PasswordController');
+Route::get('/produtos/json', 'ProdutoController@listaJson');
+Route::get(
+   '/produtos/remove/{id}', 
+   'ProdutoController@remove'
+    )
+   ->where('id', '[0-9]+');
+
+Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
 Route::get('/produtos', ['uses' => 'ProdutoController@lista']);
+/*Route::get('/produtos/remove/{id}', [
+   'middleware' => 'nosso-middleware',
+   'uses' => 'ProdutoController@remove'
+]);*/
+//Listagem de produtos
 //Cadastrando um produto
-Route::get('/produtos/adiciona', 'ProdutoController@adiciona');
+//Route::get('/produtos/adiciona', 'ProdutoController@adiciona');
 //Direcionando para a apagina de cadastro
 Route::get('/produtos/novo', 'ProdutoController@novo');
 //Visualizando produto
@@ -28,3 +58,15 @@ Route::get(
 //Route::get('/produtos/mostra', 'ProdutoController@mostra');
 //Route::get('/produtos/mostra/{id?}', 'ProdutoController@mostra');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
