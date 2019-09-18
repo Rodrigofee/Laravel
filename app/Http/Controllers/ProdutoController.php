@@ -10,6 +10,14 @@ use estoque\Http\Requests\ProdutosRequest;
 
 class ProdutoController extends Controller
 {
+
+
+  public function __construct()
+    {
+        $this->middleware('auth', 
+            ['only' => ['adiciona', 'remove']]);
+    }
+
   public function altera($id)
   {
 
@@ -31,7 +39,17 @@ class ProdutoController extends Controller
       return redirect()->action('ProdutoController@lista')->withInput(Request::only('nome'));
     }
   }
-  public function remove($id)
+  //ver depois para validação
+  public function remove($id){
+    if (Auth::guest()) 
+    {
+        return redirect('/auth/login');
+    }
+    $produto = Produto::find($id);
+    $produto->delete();
+    return redirect()->action('ProdutoController@lista');
+}
+  public function remove1($id)
   {
     /*
      *Não deleta a linha do banco, apenas desativa a exibição;
@@ -121,10 +139,10 @@ class ProdutoController extends Controller
 
   public function lista()
   {
-   /* $limit = 10;
-    $order = "order by id desc";
-    $produtos = DB::select('select * from produtos where ativo = 1 ')->paginate(5);
-
+   // $limit = 10;
+   // $order = "order by id desc";
+    //$produtos = DB::select('select * from produtos where ativo = 1 ')->paginate(5);
+/*
     //$data = ['produtos' => $produtos];
     if (view()->exists('produtos.listagem')) {
       //return view('listagem', $data);

@@ -10,17 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/home', 'HomeController@index');
+
+//--Novo modelo de autenticação
+Route::get('/login', 'LoginController@login');
+//--
+
+
+
+
+//Route::get('/home', 'HomeController@index');
 Route::post('/produtos/update', 'ProdutoController@update');
 Route::get(
    '/produtos/altera/{id}', 
    'ProdutoController@altera'
     )
    ->where('id', '[0-9]+');
-//Route::resource('auth', 'Auth\LoginController');
-//Route::resource('password', 'Auth\ForgotPasswordController');
-Route::resource('auth','Auth\AuthController');
-Route::resource('password','Auth\PasswordController');
+Route::resource('auth', 'Auth\LoginController');
+Route::resource('password', 'Auth\ForgotPasswordController');
+//Route::resource('auth','Auth\AuthController');
+//Route::resource('password','Auth\PasswordController');
 Route::get('/produtos/json', 'ProdutoController@listaJson');
 Route::get(
    '/produtos/remove/{id}', 
@@ -30,6 +38,10 @@ Route::get(
 
 Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
 Route::get('/produtos', ['uses' => 'ProdutoController@lista']);
+/*Route::get('/produtos/remove/{id}', [
+   'middleware' => 'nosso-middleware',
+   'uses' => 'ProdutoController@remove'
+]);*/
 //Listagem de produtos
 //Cadastrando um produto
 //Route::get('/produtos/adiciona', 'ProdutoController@adiciona');
